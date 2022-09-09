@@ -1,4 +1,4 @@
-# Проект Yatube API
+# Проект API для Yatube
 
 ## Описание проекта:
 Yatube API для проекта социальной сети Yatube

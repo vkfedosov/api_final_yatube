@@ -24,11 +24,11 @@ class Post(models.Model):
         User, on_delete=models.CASCADE, related_name='posts',
     )
     image = models.ImageField(
-        upload_to='posts/', null=True, blank=True,
+        upload_to='posts/images/', null=True, blank=True
     )
     group = models.ForeignKey(
         Group, on_delete=models.CASCADE,
-        related_name="posts", blank=True, null=True
+        related_name="posts", blank=True, null=True, default=None
     )
 
     def __str__(self):

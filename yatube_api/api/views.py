@@ -1,10 +1,20 @@
-from posts.models import Group, Post, User
-from rest_framework import filters, pagination, permissions, viewsets
+from rest_framework import filters, mixins, pagination, permissions, viewsets
 from rest_framework.generics import get_object_or_404
 
+from posts.models import Group, Post, User
 from .permissions import IsAuthorOrReadOnly
-from .serializers import (CommentSerializer, FollowSerializer, GroupSerializer,
-                          PostSerializer)
+from .serializers import (
+    CommentSerializer,
+    FollowSerializer,
+    GroupSerializer,
+    PostSerializer,
+)
+
+
+class CreateRetrieveViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
+                            viewsets.GenericViewSet):
+    """ViewSet для GET, POST запросов."""
+    pass
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -40,7 +50,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         )
 
 
-class FollowViewSet(viewsets.ModelViewSet):
+class FollowViewSet(CreateRetrieveViewSet):
     """ViewSet модели Follow."""
     serializer_class = FollowSerializer
     permission_classes = (permissions.IsAuthenticated,)
