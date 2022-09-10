@@ -30,15 +30,6 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = '__all__'
 
-    def update(self, instance, validated_data):
-        instance.text = validated_data.get('text', instance.text)
-        instance.pub_date = validated_data.get('pub_date', instance.pub_date)
-        instance.image = validated_data.get('image', instance.image)
-        instance.group = validated_data.get('group', instance.group)
-
-        instance.save()
-        return instance
-
 
 class GroupSerializer(serializers.ModelSerializer):
     """Serializer модели Group."""

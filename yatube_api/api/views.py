@@ -11,12 +11,6 @@ from .serializers import (
 )
 
 
-class CreateRetrieveViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
-                            viewsets.GenericViewSet):
-    """ViewSet для GET, POST запросов."""
-    pass
-
-
 class PostViewSet(viewsets.ModelViewSet):
     """ViewSet модели Post."""
     queryset = Post.objects.all()
@@ -50,7 +44,8 @@ class CommentViewSet(viewsets.ModelViewSet):
         )
 
 
-class FollowViewSet(CreateRetrieveViewSet):
+class FollowViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
+                    viewsets.GenericViewSet):
     """ViewSet модели Follow."""
     serializer_class = FollowSerializer
     permission_classes = (permissions.IsAuthenticated,)
